@@ -1,59 +1,36 @@
 # BuspayEcommerce
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.17.
+### Escalabilidade do projeto
+Esse projeto terá um foco maior na arquitetura que será utilizada. 
+Partirei do princípio de que a aplicação inicialmente não terá grande complexidade, mas, caso haja o crescimento em grande escala a aplicação terá suporte à isso.
+Portanto, separarei a aplicação por módules que por sua vez irão carregar sob demanda, dentro desses módulos pode haver outros e assim sucessivamente.
 
-## Development server
 
-To start a local development server, run:
+### Visão geral antes do início do projeto
+1. Definir o tipo de arquitetura a ser utilizada para que seja escalável
+2. Implementar facades para que conforme a aplicação cresça, se precisarmos mudar a forma de lidar com estados para ngrx por exemplo, não seja necessário mexer no component.
+3. Também irei implementar git flow pra manter a organização dos commits/branchs
+4. Vou utilizar o tailwind para o estilo da aplicação, utilizando o mobile first.
+5. Um ponto importante que notei é que o backend não possui queries para realizar a filtragem, portanto, os filtros serão aplicados no próprio front.
+6. Vou definir os módulos de core e shared para melhor organização do projeto.
+7. Após a realização da integração completa irei trabalhar mais no quesito design pra deixar mais bonito e atrativo.
+8. Se der tempo, tentarei implementar os outros endpoints que não foram solicitados no teste.
+9. Por fim, fazer uma breve documentação para apresentação do projeto e leitura posterior pelos avaliadores.
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Referencias que estudei:
 
-## Code scaffolding
+#### Arquitetura / Delimitação por pastas
+https://www.youtube.com/watch?v=bm5i7dZPPxg
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+#### Facade pattern
+https://www.youtube.com/watch?v=hRNBSNtZ-JU
 
-```bash
-ng generate component component-name
-```
+#### Facade pattern
+https://medium.com/@andreaspoyias/design-patterns-a-quick-guide-to-facade-pattern-16e3d2f1bfb6
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+#### Estruturas escaláveis
+https://victorfjansen.com/estruturas-escal%C3%A1veis-para-aplica%C3%A7%C3%B5es-angular-e-estrat%C3%A9gias-de-sincroniza%C3%A7%C3%A3o-4185f4049416
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+#### Desenvolvimento em camadas
+https://dev-academy.com/angular-architecture-best-practices/
