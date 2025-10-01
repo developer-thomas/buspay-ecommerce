@@ -1,0 +1,54 @@
+<div class="min-h-20 max-w-sm rounded-2xl bg-secondary shadow-lg">
+   <div class="relative p-8">
+     <img 
+       [src]="product()?.image" 
+       [alt]="product()?.title"
+       class="w-full h-64 object-contain"
+     />
+     
+     <div class="absolute top-4 right-4 bg-primary text-secondary px-4 py-2 rounded-full font-semibold text-sm">
+       {{ product()?.price | currency: 'BRL'}}
+     </div>
+   </div>
+ 
+ 
+   <div class="p-6">
+    
+     <h3 class="text-lg font-semibold text-primary mb-1">
+       {{ product()?.title }}
+     </h3>
+ 
+   
+     <p class="text-sm text-primary-light mb-3">
+       {{ product()?.category | titlecase }}
+     </p>
+ 
+   
+     <p class="text-sm text-primary-light mb-6 line-clamp-3">
+       {{ product()?.description }}
+     </p>
+ 
+   
+     <div class="flex gap-3">
+        <div class="w-full flex justify-between items-center">
+          <div>
+            <app-base-button 
+                styleClass="primary" 
+                label="Editar" 
+                [useIcon]="true" 
+                [iconName]="AppIcon.AddIcon"
+            />
+          </div>
+          <div>
+            <app-base-button 
+                styleClass="secondary"
+                label="Excluir" 
+                [useIcon]="true" 
+                [iconName]="AppIcon.TrashIcon" 
+            />
+          </div>
+        </div>
+     </div>
+   </div>
+</div>
+ 

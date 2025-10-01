@@ -1,0 +1,38 @@
+<div class="p-6 border rounded-lg border-gray-border sticky top-24">
+
+    <h2 class="text-lg font-semibold mb-6">
+        Filtros
+    </h2>
+    <!-- Search Product -->
+     <div class="space-y-6 mb-6">
+        <app-text-filter
+            label="Buscar produto"
+            [placeholder]="'Nome do produto...'"
+            (textSearch)="onSearch($event)"
+        />
+     </div>
+
+     <!-- Price Range -->
+    <div class="space-y-3 mb-6">
+        <app-price-range-filter 
+            label="Faixa de preço"
+            (minPriceSearch)="onMinPrice($event)"
+            (maxPriceSearch)="onMaxPrice($event)"
+            
+        />
+    </div>
+
+    <!-- Category -->
+     <div class="space-y-2 mb-4">
+        <app-category-filter 
+            label="Categoria"
+            (categorySearch)="onCategory($event)"
+            [categories]="categories()"
+        />
+     </div>
+
+     <!-- Clear filters -->
+    <div class="w-full cursor-pointer">
+        <p class="text-sm hover:text-bold mx-auto">Limpar filtros</p>
+    </div>
+</div>

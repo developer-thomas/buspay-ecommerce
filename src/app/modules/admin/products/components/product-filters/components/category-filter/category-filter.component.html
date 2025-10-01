@@ -1,0 +1,20 @@
+<div class="space-y-2">
+    <label 
+            for="category"
+            class="text-sm font-medium flex items-center gap-2">
+                <app-custom-icon [iconName]="AppIcon.ProductTag"/>
+                <span>{{ label() }}</span>   
+        </label>
+        <select 
+            class="input-base" 
+            name="category" 
+            id="category"
+            (change)="onCategorySelected($event)">
+                <option value="">Todas</option>
+                @for(category of categories(); track $index) {
+                    <option [value]="category.title">
+                        {{ category.title }}
+                    </option>
+                }
+        </select>
+</div>

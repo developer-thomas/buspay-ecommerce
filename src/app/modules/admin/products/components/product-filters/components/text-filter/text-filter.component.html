@@ -1,0 +1,17 @@
+<div class="space-y-2">
+    <label class="text-sm font-medium flex items-center gap-2">
+        <app-custom-icon 
+            [iconName]="AppIcon.ProductSearch"
+        />
+
+        <span>
+            {{ label() }}
+        </span>
+    </label>
+    <input
+        type="text"
+        class="input-base"
+        (input)="onTextSearch($event)"
+        [placeholder]="placeholder()"
+    />
+</div>
