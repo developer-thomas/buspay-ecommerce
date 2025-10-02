@@ -1,0 +1,32 @@
+
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+  @for (item of [1,2,3,4,5,6]; track $index) {
+    <div class="product-card animate-pulse">
+        <div class="relative p-8">
+            <div class="w-full h-64 bg-gray-300 rounded-lg"></div>
+            <div class="absolute top-4 right-4 bg-gray-300 px-4 py-2 rounded-full h-8 w-20"></div>
+        </div>
+
+        <div class="p-6 flex flex-col flex-grow">
+            <div class="flex-grow">
+                <!-- Título -->
+                <div class="h-6 bg-gray-300 rounded mb-1"></div>
+                
+                <!-- Categoria -->
+                <div class="h-4 bg-gray-300 rounded mb-3 w-24"></div>
+                
+                <!-- Descrição - 3 linhas -->
+                <div class="h-4 bg-gray-300 rounded mb-2"></div>
+                <div class="h-4 bg-gray-300 rounded mb-2"></div>
+                <div class="h-4 bg-gray-300 rounded mb-6 w-3/4"></div>
+            </div>
+
+            <!-- Botões na parte inferior -->
+            <div class="flex justify-between items-center mt-auto">
+                <div class="h-10 bg-gray-300 rounded w-20"></div>
+                <div class="h-10 bg-gray-300 rounded w-20"></div>
+            </div>
+        </div>
+    </div>
+  }
+</div>

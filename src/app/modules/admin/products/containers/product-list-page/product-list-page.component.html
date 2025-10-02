@@ -1,19 +1,46 @@
+<app-header title="Produtos" description="Listagem de produtos" [useButton]="true" routerLink="create" />
 <main class="container mx-auto px-4 py-8">
     <!-- Filtros -->
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <aside class="lg:col-span-1">
+    <div class="grid grid-cols-1 lg:grid-cols-4 lg:gap-6">
+        <aside class="pb-6">
             <app-product-filters            
-                 
+                 (categoryChange)="onCategoryChange($event)"
+                 (maxChange)="onMaxChange($event)"
+                 (minChange)="onMinChange($event)"
+                 (searchChange)="onSearchChange($event)"
+                 [categories]="categories$ | async"
             />
         </aside>
 
-        <div class="col-span-3 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @for(card of products(); track $index) {
-                    <app-product-card
-                        [product]="card"
-                    />
-                }
+        <div class="col-span-3 min-h-44">
+            @if (loading$ | async) {
+                 <div class="w-full">
+                     <app-product-skeleton />
+                 </div>
+            } @else {
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    @for(card of paginatedProducts(); track $index) {
+                        <app-product-card
+                            [product]="card"
+                        />
+                    }@empty {
+                        <div class="col-span-full">
+                            <app-not-found />
+                        </div>
+                    }
+                </div>
+            }
+            
         </div>
-
     </div>
+
+    <div class="w-full flex justify-center mt-10" *ngIf="!(loading$ | async)">
+        <app-pagination
+            [totalItems]="totalItems"
+            [itemsPerPage]="itemsPerPage"
+            [currentPage]="currentPage()"
+            (pageChange)="onPageChange($event)"   
+        />
+    </div>
+ 
 </main>

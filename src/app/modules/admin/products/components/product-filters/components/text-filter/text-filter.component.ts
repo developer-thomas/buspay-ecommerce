@@ -24,7 +24,8 @@ export class TextFilterComponent {
 
    onTextSearch(event: Event) {
     let value = (event.target as HTMLInputElement).value;
-    this.textSearch.emit(value);
+    let treatedValue = value.trim().toLowerCase();
+    this.textSearch.emit(treatedValue);
    }
 
    

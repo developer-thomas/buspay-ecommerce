@@ -1,4 +1,4 @@
-<div class="p-6 border rounded-lg border-gray-border sticky top-24">
+<div class="p-6 border rounded-lg border-gray-border sticky top-28">
 
     <h2 class="text-lg font-semibold mb-6">
         Filtros
@@ -27,7 +27,7 @@
         <app-category-filter 
             label="Categoria"
             (categorySearch)="onCategory($event)"
-            [categories]="categories()"
+            [categories]="categories()!"
         />
      </div>
 

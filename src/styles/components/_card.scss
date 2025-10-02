@@ -1,0 +1,9 @@
+@layer components {
+    .product-card {
+      @apply rounded-2xl border border-gray-300 shadow-lg h-full flex flex-col hover:border-primary standard-hover-effect;
+    }
+  
+    .select-base {
+      @apply border rounded-md p-2 w-full bg-white border-gray-border;
+    }
+}
