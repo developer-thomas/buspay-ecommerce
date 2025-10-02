@@ -21,9 +21,9 @@ export class PriceRangeFilterComponent {
 
   onMinChange(event: Event) {
     let value = (event.target as HTMLInputElement).value;
-    let parsedValue = parseFloat(value);
+    let parsedValue = parseFloat(value)
 
-    this.minPriceSearch.emit(parsedValue);
+    this.minPriceSearch.emit(parsedValue)
   }
 
   onMaxChange(event: Event) {

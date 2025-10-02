@@ -26,20 +26,7 @@ export class ProductFiltersComponent {
   minChange = output<number>();
   maxChange = output<number>();
 
-  categories = input<IProduct[]>(
-    // Mockado para ajustar a UI
-    [
-      {
-        category: 'Camisa',
-        description: 'Camisa',
-        id: 0,
-        image: '',
-        price: 0,
-        rating: { count: 0, rate: 0 },
-        title: 'Camisa'
-      }
-    ]
-  );
+  categories = input.required<string[] | null>();
 
   onSearch(value: string) {
     this.searchChange.emit(value.trim());
