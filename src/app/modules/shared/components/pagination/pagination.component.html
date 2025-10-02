@@ -1,0 +1,30 @@
+<div class="flex gap-2 items-center">
+  @if(currentPage() > 1) {
+  <button 
+    class="px-3 py-1 border rounded" 
+    (click)="goToPage(currentPage() - 1)" 
+    [disabled]="currentPage() === 1">
+      <span>
+        Ant.
+      </span>
+  </button>
+  }
+  @for(page of pages; track $index) {
+    <button 
+      class="px-3 py-1 border rounded"
+      [ngClass]="{'bg-primary text-secondary': isActive(page)}"
+      (click)="goToPage(page)">
+        {{ page }}
+    </button>
+  }
+  @if(currentPage() < totalPages) {
+  <button 
+    class="px-3 py-1 border rounded" 
+    (click)="goToPage(currentPage() + 1)" 
+    [disabled]="currentPage() === totalPages">
+      <span>
+        Próx.
+      </span>
+  </button>
+  }
+</div>
