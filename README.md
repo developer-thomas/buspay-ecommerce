@@ -20,7 +20,7 @@ Portanto, separarei a aplicação por módules que por sua vez irão carregar so
 
 ### Checklist / Estimativas
 
-##### Dia 1 
+#### Dia 1 
 Estudei e analisei determinadas arquiteturas que podem adequar-se melhor à escalabidade. A escalabilidade está diretamente relacionada a abstração de responsabilidades, evitando/tirando acompanhamentos podemos escalar com facilidade. Portanto, decidi seguir o pattern facade para abstrair o acoplamento do component com o service. Além disso, irei seguir um modelo de padrão de desenvolvimento por camadas onde temos a aplicabilidade dos seguinte recursos dispostos abaixo:
 - abstrações adequadas entre camadas de aplicação,
 - fluxo de dados unidirecional,
@@ -34,7 +34,7 @@ Além disso, trabalhando com abstrações, conseguirei fazer o gerenciamento de 
 
 
 
-##### Dia 2
+#### Dia 2
 Dividi a aplicação por módulos, parti do pressuposto de que, talvez no futuro, podemos ter diversos módulos (administrativo, cliente, franquia, home, esquecimento de senha, etc...). Se quisermos implementar qualquer tipo de painel posterior a nossa aplicação, basta criar um novo módulo do mesmo, e atribuir a respectiva rota ao app.routes e aninhar suas filhas através de lazy-loading. 
 Além disso, trabalhei na organização das folhas de estilo da aplicação, visando evitar repetição de código para components que deverão ter a UI igual (inputs por ex.) evitando divergência na UI. Segreguei por pastas visando sua responsabilidade: 
 - Na pasta Base estarão os estilos referente à cores, tipografias, resets de estilo default, tudo que se referir à base, que inclusive, poderá ser utilizado por outros components scss.
@@ -44,6 +44,20 @@ Além disso, trabalhei na organização das folhas de estilo da aplicação, vis
 - Ainda em estilo, criei um component compartilhado específico que lidará com os ícones da aplicação. Afim de evitar acoplamento, criei uma camada de abstração para ícones, caso queiramos modificar a biblioteca de ícones, não precisaremos alterar em cada component, basta alterar o nome do ícone respectivo no mapeamento criado para esse component que toda a aplicação que consumir desse mapeamento será atualizada, além do mais, o typescript, através do enum criado, irá ajudar àquele que for atualizar a saber quais os ícones em uso atualmente. Esse mapeamento do ícone que será aplicado é feito através de um pipe chamado icon-mapper. É um pipe extremamente simples, que acessa o index do mapeamento direamente na chave inserida. 
 
 No módulo de produtos foram criados os cards para visualização dos dados da api, foram criados os dumb components de filtros que estão emitindo eventos para que possa ser utilizado nos smarts components e consequentemente nos facades. Por enquant o layer de produtos está acoplado com o service apenas para organização da UI.
+
+#### Dia 3
+Criei um component compartilhado de paginação, um componente simples sem utilização de nenhuma biblioteca onde é possível navegar entre as páginas, limitadas a 6 produtos por page. 
+Fiz a implementação dos filtros de buscas combinados utilizando signals, evitei a utilização de toSignals e de computed para não aumentar a complexidade do código, uma vez que foi possível resolver o problema de forma simplificada. Basicamente pego todos os signals de filtro no container products-list e unifico eles em um método chamado applyFilters, esse método por sua vez, chama o método applyFilters do facade (deixei o mesmo nome pra facilitar lembrar). Conforme fui criando esse método percebi que o facade estava implementando além do que deveria, aumentar o aninhamento dentro desse método e criando um acoplamento, fugindo da responsabilidade que ele possui de apenas orquestrar. Portanto, criei uma pasta de services, que ficarão armazenados serviços auxiliares que ajudarão o facade no orquestramento. A sua utilização consiste na inscrição do stream de storage global de produtos, usando o untilDestroyed para evitar memory leak e passando para o serviço especializado em filtros os produtos que estão na storage e um objeto de filtros pegos no container(smart component), logo em seguida chamo o setFilteredProducts para caso haja uma atualizaçõ nos filtros, o service de filtragem ficar adepto a ele. 
+Dentro do service de product-filters eu faço a filtragem dentro dos produtos que estão na storage. 
+Caso futuramente haja a necessidade de implementação de novos filtros, basta adicionar nesse método, uma vez que ele está abstraído, não estou validando trim ou lowercase nele, pq já fiz isso no dumb component. 
+Para uma busca não encontrada nos filtros adicionei uma página default de itens não encontrados.
+
+Criei também um header para adicionar um botão de adicionar novo produto.
+Achei interessante fazer essa criação de produto através de uma rota mesmo ao invés de abrir modal, pois assim se torna mais escalável, as pastas ficam mais organizadas e as rotas ficam intuitivas na utilização de smart components. Com a mesma mentalidade de escalonamento, criei containers separados para criação e edição de produto, assim evita acoplamento, fica mais organizado e cada container fica com sua respectiva responsabilidade. 
+
+Para a criação/edição de produtos, criei um dumb component para formulário, assim, posso utilizar o mesmo formulário tanto para criar, quanto pra editar, passando apenas o objeto de produtos caso seja edição, caso não seja, inicia com os forms vazios.
+
+Coloquei também skeletons na UI para melhor experiência do usuário ao aguardar pelo carregamento da página e também evita mostrar as imagens carregando caso o usuário esteja com a internet lenta, não fica legal passar essa experiencia pro usuario. 
 
 ### Referências:
 
@@ -66,3 +80,12 @@ https://dev-academy.com/angular-architecture-best-practices/
 https://blog.angular-university.io/angular-signal-components/
 https://blog.codedimension.com.br/post/signal-inputs/#:~:text=Como%20usar%20a%20fun%C3%A7%C3%A3o%20input()?,das%20funcionalidades%20dessa%20nova%20abordagem.
 https://www.youtube.com/watch?v=Ugfm1YiQYX8
+https://medium.com/netanelbasal/navigating-the-nuances-of-tosignal-in-angular-what-to-know-e4d6a4b5dfaf
+
+#### Paginação
+https://www.youtube.com/watch?v=BBxi3muJ-Cc
+
+#### Gerenciamento de estados
+https://www.youtube.com/watch?v=GKfTktLJQnY
+https://www.youtube.com/watch?v=f5sJHoyBOq0&t=14s
+https://dev.to/ikauedev/usando-rxjs-com-signals-no-angular-uma-abordagem-moderna-para-gerenciamento-de-estado-reativo-21o9
