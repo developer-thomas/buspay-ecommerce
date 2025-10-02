@@ -1,19 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CustomIconComponent } from '../custom-icon/custom-icon.component';
 import { AppIcon } from '../custom-icon/enum/app-icon.enum';
 
-type btnStyleClass = 'primary' | 'secondary' | 'outlined' 
+type btnStyleClass = 'primary' | 'secondary' | 'filled' 
 
 @Component({
   selector: 'app-base-button',
   imports: [CommonModule, CustomIconComponent],
   templateUrl: './base-button.component.html',
-  styleUrl: './base-button.component.scss'
+  styleUrl: './base-button.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseButtonComponent {
   public label = input.required<string>();
   public styleClass = input<btnStyleClass>('primary');
+  public disabled = input<boolean>(false);
   
   public useIcon = input<boolean>(false);
   public iconName = input<AppIcon>();
@@ -29,8 +31,8 @@ export class BaseButtonComponent {
       case 'secondary':
         return `${baseStyle} btn-secondary`;
         
-      case 'outlined':
-        return `${baseStyle} btn-outlined`
+      case 'filled':
+        return `${baseStyle} btn-filled`
        
       default:
         return `${baseStyle}`

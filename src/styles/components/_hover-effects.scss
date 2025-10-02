@@ -1,0 +1,6 @@
+@layer components {
+
+  .standard-hover-effect {
+    @apply transition-all duration-300
+  }
+}
