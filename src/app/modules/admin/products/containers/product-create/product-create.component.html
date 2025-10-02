@@ -1,0 +1,8 @@
+<app-header title="Produtos" description="Criar novo produto" [useButton]="false" />
+
+<app-product-form
+  [categories]="(categories$ | async)!"
+  [loading]="(loading$ | async)!"
+  (submitForm)="onSubmit($event)"
+  (cancel)="onCancel()"
+/>
