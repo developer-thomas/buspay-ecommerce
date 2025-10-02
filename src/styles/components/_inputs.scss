@@ -1,0 +1,9 @@
+@layer components {
+    .input-base {
+      @apply border border-gray-border rounded-md px-4 py-2 w-full text-sm focus:outline-none focus:ring-2 focus:ring-primary;
+    }
+  
+    .select-base {
+      @apply border rounded-md p-2 w-full bg-white border-gray-border;
+    }
+}
