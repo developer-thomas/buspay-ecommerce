@@ -33,7 +33,7 @@
                 </div>
             }
 
-            @if ((loading$ | async)) {
+            @if (!(loading$ | async)) {
             <div class="w-full flex justify-center mt-10">
                 <app-pagination
                     [totalItems]="totalItems"
