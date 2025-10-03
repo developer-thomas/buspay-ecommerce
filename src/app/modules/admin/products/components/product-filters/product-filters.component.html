@@ -1,0 +1,32 @@
+<div class="p-6 border rounded-lg border-gray-border sticky top-28">
+
+    <h2 class="text-lg font-semibold mb-6">
+        Filtros
+    </h2>
+    
+     <div class="space-y-6 mb-6">
+        <app-text-filter
+            label="Buscar produto"
+            [placeholder]="'Nome do produto...'"
+            (textSearch)="onSearch($event)"
+        />
+     </div>
+
+    <div class="space-y-3 mb-6">
+        <app-price-range-filter 
+            label="Faixa de preço"
+            (minPriceSearch)="onMinPrice($event)"
+            (maxPriceSearch)="onMaxPrice($event)"
+            
+        />
+    </div>
+
+     <div class="space-y-2 mb-4">
+        <app-category-filter 
+            label="Categoria"
+            (categorySearch)="onCategory($event)"
+            [categories]="categories()!"
+        />
+     </div>
+
+</div>

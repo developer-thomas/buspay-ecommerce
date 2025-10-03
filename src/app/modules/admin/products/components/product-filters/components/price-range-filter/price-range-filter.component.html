@@ -1,0 +1,23 @@
+<div class="space-y-2">
+    <label  
+        for="minPrice"
+        class="text-sm font-medium flex items-center gap-2">
+        <app-custom-icon [iconName]="AppIcon.ProductPrice"/>
+        <span>{{ label() }}</span>    
+    </label>
+
+    <div class="grid grid-cols-2 gap-2">  
+        <input 
+            placeholder="Min."
+            class="input-base"
+            id="minPrice"
+            (input)="onMinChange($event)"
+        >
+        <input 
+            placeholder="Máx."
+            class="input-base"
+            id="maxPrice"
+            (input)="onMaxChange($event)"
+        >
+    </div>
+</div>

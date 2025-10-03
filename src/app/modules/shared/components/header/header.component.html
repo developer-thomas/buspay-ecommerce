@@ -1,0 +1,21 @@
+<header class="border-b border-gray-border backdrop-blur-sm sticky top-0 z-40">
+  <div class="container mx-auto px-4 py-2.5">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-sm font-bold mt-1 ">{{ title() }}</h1>
+        <p class="text-[20px] sm:md md:text-lg lg:text-2xl">{{ description() }}</p>
+      </div>
+      
+      @if(useButton()) {
+      <app-base-button 
+          label="Novo Produto"
+          styleClass="filled"
+          [useIcon]="true"
+          [iconName]="AppIcon.AddIcon"
+          (click)="onButtonClick()"
+        />
+      }
+    </div>
+  </div>
+</header>
+  

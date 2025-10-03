@@ -1,0 +1,49 @@
+<app-header title="Produtos" description="Listagem de produtos" [useButton]="true" (clickBtn)="onButtonClick()" />
+<main class="container mx-auto px-4 py-8">
+
+    <div class="grid grid-cols-1 xl:grid-cols-4 xl:gap-6">
+        <aside class="pb-6">
+            <app-product-filters            
+                 (categoryChange)="onCategoryChange($event)"
+                 (maxChange)="onMaxChange($event)"
+                 (minChange)="onMinChange($event)"
+                 (searchChange)="onSearchChange($event)"
+                 [categories]="categories$ | async"
+            />
+        </aside>
+
+        <div class="col-span-3 min-h-44">
+            @if (loading$ | async) {
+                 <div class="w-full">
+                     <app-product-skeleton />
+                 </div>
+            } @else {
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    @for(card of paginatedProducts(); track $index) {
+                        <app-product-card
+                            [product]="card"
+                            (edit)="onEdit($event)"
+                            (delete)="onDelete($event)"
+                        />
+                    }@empty {
+                        <div class="col-span-full">
+                            <app-not-found />
+                        </div>
+                    }
+                </div>
+            }
+
+            @if ((loading$ | async)) {
+            <div class="w-full flex justify-center mt-10">
+                <app-pagination
+                    [totalItems]="totalItems"
+                    [itemsPerPage]="itemsPerPage"
+                    [currentPage]="currentPage()"
+                    (pageChange)="onPageChange($event)"   
+                />
+            </div>
+            }
+        </div>
+    </div>
+ 
+</main>

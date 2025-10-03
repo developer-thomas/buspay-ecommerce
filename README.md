@@ -1,36 +1,103 @@
-# BuspayEcommerce
+# BusPay E-commerce - Teste Técnico Frontend Pleno
 
-### Escalabilidade do projeto
-Esse projeto terá um foco maior na arquitetura que será utilizada. 
-Partirei do princípio de que a aplicação inicialmente não terá grande complexidade, mas, caso haja o crescimento em grande escala a aplicação terá suporte à isso.
-Portanto, separarei a aplicação por módules que por sua vez irão carregar sob demanda, dentro desses módulos pode haver outros e assim sucessivamente.
+## Resumo Executivo
+- **Posição**: Frontend Pleno Angular
+- **Foco**: Arquitetura escalável e padrões modernos
+- **Tecnologias**: Angular 19, TypeScript, Tailwind CSS, RxJS
+
+## Objetivos do Teste Técnico
+- CRUD completo de produtos
+- Sistema de filtros
+- Paginação
+- Arquitetura escalável
+- Interface responsiva
+- Tratamento de erros
+- Configuração adequada do projeto
+
+## Como Executar
+
+### Pré-requisitos
+- Node.js 18+
+- npm ou yarn
+
+### Instalação
+```bash
+npm install
+```
+
+### Desenvolvimento
+```bash
+npm run start ou ng serve
+```
+
+### Build
+```bash
+npm run build ou ng build
+```
+
+### Build em prod 
+```bash
+ng build --prod
+```
 
 
-### Visão geral antes do início do projeto
-1. Definir o tipo de arquitetura a ser utilizada para que seja escalável
-2. Implementar facades para que conforme a aplicação cresça, se precisarmos mudar a forma de lidar com estados para ngrx por exemplo, não seja necessário mexer no component.
-3. Também irei implementar git flow pra manter a organização dos commits/branchs
-4. Vou utilizar o tailwind para o estilo da aplicação, utilizando o mobile first.
-5. Um ponto importante que notei é que o backend não possui queries para realizar a filtragem, portanto, os filtros serão aplicados no próprio front.
-6. Vou definir os módulos de core e shared para melhor organização do projeto.
-7. Após a realização da integração completa irei trabalhar mais no quesito design pra deixar mais bonito e atrativo.
-8. Se der tempo, tentarei implementar os outros endpoints que não foram solicitados no teste.
-9. Por fim, fazer uma breve documentação para apresentação do projeto e leitura posterior pelos avaliadores.
+## Documentação
+- [Rascunho Inicial para documentação](./docs/development/rascunhos-documentacao.md)
+- [Arquitetura Detalhada](./docs/development/architecture.md)
+- [Processo de Desenvolvimento](./docs/development/daily-checklist.md)
+- [Decisões Técnicas](./docs/development/decisions.md)
+- [Referências e Estudos](./docs/references/resources.md)
 
 
-### Referencias que estudei:
+## Funcionalidades Implementadas
 
-#### Arquitetura / Delimitação por pastas
-https://www.youtube.com/watch?v=bm5i7dZPPxg
+### CRUD de Produtos
+- **Create**: Formulário com validações
+- **Read**: Listagem com filtros e paginação
+- **Update**: Edição com pre-carregamento de dados
+- **Delete**: Exclusão com confirmação
 
-#### Facade pattern
-https://www.youtube.com/watch?v=hRNBSNtZ-JU
+### Sistema de Filtros
+- Busca por nome
+- Filtro por categoria
+- Filtro por faixa de preço
+- Filtros client-side (instantâneos)
 
-#### Facade pattern
-https://medium.com/@andreaspoyias/design-patterns-a-quick-guide-to-facade-pattern-16e3d2f1bfb6
+### UX/UI
+- Design responsivo (mobile-first)
+- Loading states com skeletons
+- Stylesheet com Tailwind CSS
+- Feedback visual de ações com toasts
+- Confirmações com sweeetAlert2 para ações destrutivas
 
-#### Estruturas escaláveis
-https://victorfjansen.com/estruturas-escal%C3%A1veis-para-aplica%C3%A7%C3%B5es-angular-e-estrat%C3%A9gias-de-sincroniza%C3%A7%C3%A3o-4185f4049416
+### Arquitetura
+- Facade Pattern para abstração
+- Store Pattern para gerenciamento de estado
+- Smart(Containers)/Dumb Components
+- Lazy Loading para performance
+- Signals para estado reativo nos containers
+- RxJs para lógicas complexas no facade
 
-#### Desenvolvimento em camadas
-https://dev-academy.com/angular-architecture-best-practices/
+## O que pode ser implementado no futuro
+
+### Funcionalidades
+- Implementação de novos módulos com escalonamento 
+- Possibilidade de crescimento da plataforma interna do administrador
+- Pode-se optar por adicionar Angular Material
+
+### Arquitetura
+- Migração para NgRx se aplicação crescer muito
+- Implementação de testes unitários 
+- Ambos acima se tornam viáveis com a arquitetura baseada em abstrações deste projeto
+
+## Destaques Técnicos
+- **Implementação de clean code com abstração de responsabilidades e centralizando o core da aplicação**
+- **Principios DRY segregando componentes e utilitários reutilizáveis**
+- **Arquitetura de rotas escalonável, podendo acrescentar vários módulos pais**
+- **Alguns princípios SOLID aplicados**
+- **KISS: Diminuindo o máximo possível a complexidade para que haja compreensão e ainda sim funcione bem**
+- **YARN: Apesar do suporte a uma estrutura escalável foi implementado apenas o que realmente precisa**
+- **Padrões modernos do Angular (Signals, OnPush, Lazy Loading)**
+- **Código limpo com TypeScript forte e interfaces bem definidas** 
+- **UX/UI responsiva com loading states e feedback visual e mobile first**
+- **Documentação completa  do processo de desenvolvimento**

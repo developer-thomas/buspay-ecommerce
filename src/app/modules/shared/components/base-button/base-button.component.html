@@ -1,0 +1,16 @@
+<!-- Essa classe group faz os filhos herdarem o estado do pai -->
+<button [ngClass]="getClass()" class="group" [disabled]="disabled()">
+    
+  <div class="flex items-center justify-center px-4 space-x-2 flex-wrap">
+      @if(useIcon() && iconName()) {
+          <app-custom-icon 
+          [iconName]="iconName()!"
+          class="text-current mt-1"
+          />
+      }
+    
+      <span>
+          {{ label() | titlecase }}
+      </span>
+  </div>
+</button>

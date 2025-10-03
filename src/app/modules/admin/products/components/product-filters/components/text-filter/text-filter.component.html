@@ -1,0 +1,18 @@
+<div class="space-y-2">
+    <label for="textFilter" class="text-sm font-medium flex items-center gap-2">
+        <app-custom-icon 
+            [iconName]="AppIcon.ProductSearch"
+        />
+
+        <span>
+            {{ label() }}
+        </span>
+    </label>
+    <input
+        type="text"
+        id="textFilter"
+        class="input-base"
+        (input)="onTextSearch($event)"
+        [placeholder]="placeholder()"
+    />
+</div>
