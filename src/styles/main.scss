@@ -1,5 +1,8 @@
 // Base 
 @use './base/colors';
+@use './base/resets';
+@use './base/typography';
+@use 'ngx-toastr/toastr';
 
 // Components
 @use './components/inputs';
