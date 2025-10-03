@@ -27,25 +27,21 @@ export class ProductsStore {
     setLoading(loading: boolean) {
         this.loadingSubject.next(loading);
     }
-    
 
-    /** Define um novo produto na store */
+    /** Define um novo produto na store e mantém atualizado tanto na store quanto no filteredStore */
     setNewProduct(product: IProduct) {
         const products = this.productsSubject.value;
 
-        // preciso deixar atualizado tanto na store quanto no filteredStore
         this.productsSubject.next([...products, product]);
         this.filteredProductsSubject.next([...products, product]);
     }
 
-    /** Define um produto removido na store */
+    /** Define um produto removido na store e mantém atualizado tanto na store quanto no filteredStore */
     setRemovedProduct(productId: number) {
         const products = this.productsSubject.value;
 
-        // preciso deixar atualizado, tambe´m, tanto na store quanto no filteredStore
         this.productsSubject.next(products.filter(p => p.id !== productId));
         this.filteredProductsSubject.next(products.filter(p => p.id !== productId));
-
         console.log(this.productsSubject.value);
     }
 

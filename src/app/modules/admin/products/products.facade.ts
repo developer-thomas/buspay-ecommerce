@@ -16,7 +16,6 @@ import { ToastrService } from "ngx-toastr";
 @Injectable({ providedIn: 'root' })
 export class ProductsFacade {
   private filtersService = inject(ProductFiltersService);
-  // Destroyref precisa ser injetado através do método e não pelo construtor
   private destroyRef = inject(DestroyRef);
   private api = inject(ProductsApiService);
   private store = inject(ProductsStore);
@@ -27,7 +26,7 @@ export class ProductsFacade {
   filteredProducts$ = this.store.filteredProducts$;
   loading$ = this.store.loading$;
   
-  //Observable para expor as categorias dos produtos
+  // Observable para expor as categorias dos produtos
   categories$ = this.products$.pipe(
     map(products => {
       const categories: string[] = [];
@@ -40,12 +39,10 @@ export class ProductsFacade {
     })
   )
 
-  /**
-   * Método para carregar os produtos iniciais e armazenar na store
-   */
+  /** Método para carregar os produtos iniciais e armazenar na store */
   loadProducts() {
     this.store.setLoading(true);
-
+    
     this.api.findAll()  
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -57,10 +54,7 @@ export class ProductsFacade {
       })
   }
 
-  /**
-   * Método para aplicar os filtros na store
-   * @param filters Os filtros a serem aplicados
-   */
+  /**  Método para aplicar os filtros na store */
   applyFilters(filters: IProductFilters) {
     this.products$
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -70,20 +64,16 @@ export class ProductsFacade {
       });
   }
 
-  // changePage(page: number) {
-  //   this.store.setPage(page);
-  // }
-
-  // ====================== CRUD ======================
+  // Operações CRUD 
   createProduct(product: IProduct) {
     this.store.setLoading(true);
 
+    /** Atualize store após persistência na API (Pessimista updates) */
     this.api.create(product)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: created => {
           this.store.setNewProduct(created);
-          console.log('criou', created);
           this.toastr.success('Produto criado com sucesso.');
         },
         error: () => this.store.setLoading(false),
@@ -91,6 +81,7 @@ export class ProductsFacade {
       })
   }
 
+  /** Atualiza e envia para a store após persistência na API (Pessimista updates) */
   updateProduct(productId: number, product: IProduct) {
     this.store.setLoading(true);
 
@@ -99,7 +90,6 @@ export class ProductsFacade {
       .subscribe({
         next: updated => {
           this.store.setNewProduct(updated);
-          console.log('atualizou', updated);
           this.toastr.success('Produto atualizado com sucesso.');
         },
         error: () => this.store.setLoading(false),
@@ -107,6 +97,7 @@ export class ProductsFacade {
       })
   }
 
+  /** Deleta e atualize store após persistência na API (Pessimista updates) */
   deleteProduct(productId: number) {
     this.store.setLoading(true);
     this.api.delete(productId)
@@ -114,7 +105,6 @@ export class ProductsFacade {
       .subscribe({
         next: () => {
           this.store.setRemovedProduct(productId);
-          console.log('deletou', productId);
           this.toastr.success('Produto deletado com sucesso.');
         },
         error: () => this.store.setLoading(false),

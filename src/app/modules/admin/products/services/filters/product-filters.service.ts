@@ -4,13 +4,14 @@ import { IProductFilters } from '../../models/filters.model';
 
 /**
  * Serviço que vai atuar como helper para aplicar os filtros nos produtos
- * Caso um dia eu precise de mais filtros, eu posso adicionar por aqui
+ * Caso um dia eu precise de mais filtros, eu posso adicionar por aqui e não inflar o facade
  */
 @Injectable({
   providedIn: 'root'
 })
 export class ProductFiltersService {
 
+  /** Aplica os filtros nos produtos */
   applyFilters(products: IProduct[], filters: IProductFilters): IProduct[] {
     return products.filter(product =>
       this.byCategory(product, filters.category) &&

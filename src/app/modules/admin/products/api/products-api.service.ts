@@ -5,6 +5,7 @@ import { IProduct } from '../models/product.model';
 
 const BASE_URL_PRODUCT = 'products'
 
+/** SERVICE para a API de produtos que extende o baseService*/
 @Injectable({
   providedIn: 'root'
 })

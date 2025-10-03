@@ -1,6 +1,6 @@
 <app-header title="Produtos" description="Listagem de produtos" [useButton]="true" (clickBtn)="onButtonClick()" />
 <main class="container mx-auto px-4 py-8">
-    <!-- Filtros -->
+
     <div class="grid grid-cols-1 xl:grid-cols-4 xl:gap-6">
         <aside class="pb-6">
             <app-product-filters            
@@ -33,7 +33,8 @@
                 </div>
             }
 
-            <div class="w-full flex justify-center mt-10" *ngIf="!(loading$ | async)">
+            @if ((loading$ | async)) {
+            <div class="w-full flex justify-center mt-10">
                 <app-pagination
                     [totalItems]="totalItems"
                     [itemsPerPage]="itemsPerPage"
@@ -41,7 +42,7 @@
                     (pageChange)="onPageChange($event)"   
                 />
             </div>
-  
+            }
         </div>
     </div>
  

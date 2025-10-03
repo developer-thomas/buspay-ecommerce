@@ -3,6 +3,13 @@ module.exports = {
   content: ['./src/**/*.{html,ts}'],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+        openSans: ['Open Sans', 'sans-serif'],
+        lora: ['Lora', 'serif'],
+        merriweather: ['Merriweather', 'serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+      },
       colors: {
         'primary': 'var(--color-primary)',
         'primary-light': 'var(--color-primary-light)',

@@ -18,7 +18,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './product-create.component.scss'
 })
 export class ProductCreateComponent implements OnInit{
-
   private productsFacade = inject(ProductsFacade);
   private router = inject(Router);
   private location = inject(Location);
@@ -31,6 +30,7 @@ export class ProductCreateComponent implements OnInit{
     this.productsFacade.loadProducts();
   }
 
+  /** Envia o produto para o facade e se inscreve no loading$ para fazer o skeleton funcionar*/
   onSubmit(product: IProduct) {
     this.productsFacade.createProduct(product);
 

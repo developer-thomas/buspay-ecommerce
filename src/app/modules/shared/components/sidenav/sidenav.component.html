@@ -1,5 +1,5 @@
 <div class="flex h-screen relative">
-  
+  <!-- Menu Desktop -->
   <aside class="hidden md:flex flex-col w-56 border-r bg-card">
     <div class="p-5 border-b border-gray-border">
       <img src="images/logo.png" alt="BusPay Ecommerce" class="h-9 w-auto mx-auto">
@@ -20,6 +20,7 @@
   </aside>
 
   
+  <!-- Menu Mobile -->
   @if (drawerOpen()) {
     <aside class="fixed inset-y-0 left-0 z-50 w-56 bg-card md:hidden bg-primary text-secondary">
       <div class="p-5 border-b border-gray-border">
@@ -43,7 +44,7 @@
     </aside>
   }
 
-  
+  <!-- Conteúdo -->
   <div class="flex-1 flex flex-col">
     <main class="flex-1 overflow-auto bg-background">
       <router-outlet />
@@ -53,10 +54,11 @@
   <button
     (click)="toggleDrawer()"
     class="fixed bottom-4 left-6 z-50 bg-primary text-secondary p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 md:hidden w-12"
-    [ngClass]="{'bg-secondary text-black': drawerOpen()}"
+    [ngClass]="{'bg-secondary text-primary': drawerOpen()}"
     [class.rotate-180]="drawerOpen()"
   >
     <app-custom-icon 
+      [ngClass]="{'text-primary': drawerOpen()}"
       [iconName]="drawerOpen() ? AppIcon.CloseIcon : AppIcon.MenuIcon" 
     />
   </button>
