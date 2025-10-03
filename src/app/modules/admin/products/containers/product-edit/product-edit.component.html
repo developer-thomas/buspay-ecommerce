@@ -1,6 +1,13 @@
-<!-- <app-product-form 
-    [product]="product"
-    [categories]="categories$ | async"
-    (submitForm)="updateProduct($event)"
-    (cancel)="goBack()">
-</app-product-form> -->
+<app-header title="Produtos" description="Editar um produto" [useButton]="false" />
+
+@if (loading$ | async) {
+    <app-form-skeleton />
+} @else {
+    <app-product-form
+        [product]="product()"
+        [categories]="(categories$ | async)!"
+        (submitForm)="onSubmit($event)"
+        (cancel)="onCancel()"
+    />
+}
+ 

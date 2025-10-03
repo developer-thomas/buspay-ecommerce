@@ -1,6 +1,6 @@
 <main class="container mx-auto py-8">
-    <div class="max-w-2xl mx-auto p-6 product-card standard-hover-effect">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div class="max-w-4xl mx-auto p-6 product-card standard-hover-effect">
+      <form [formGroup]="form" class="space-y-6">
         
        
         <div class="space-y-2">
@@ -23,9 +23,11 @@
         <div class="space-y-2">
           <label for="price">Preço *</label>
           <input 
+            prefix="R$ "
+            mask="separator.2"
+            thousandSeparator="."
             id="price" 
-            type="number" 
-            step="0.01" 
+            type="text"  
             formControlName="price" placeholder="R$ 0.00"
             class="input-base" 
           />
@@ -47,8 +49,8 @@
           >
             <option value="" disabled>Selecione uma categoria</option>
            
-            @for (cat of categories(); track $index) {
-              <option [value]="cat">{{ cat | titlecase }}</option>
+            @for (category of categories(); track $index) {
+              <option [value]="category">{{ category | titlecase }}</option>
             }
           </select>
 
@@ -97,6 +99,7 @@
   
   
         <div class="flex gap-3 pt-4 justify-between">
+
           <app-base-button 
             label="cancelar"
             styleClass="secondary"
@@ -106,12 +109,13 @@
           />
           
           <app-base-button 
-            [label]="product() ? 'Atualizar Produto' : 'Criar Produto'"
+            [label]=" product() ? 'Atualizar Produto' : 'Criar Produto' "
             styleClass="filled"
-            [disabled]="loading() ? true : false"
-            (click)="onSubmit()"
+            [disabled]="loading() || form.invalid"
             [useIcon]="false"
+            (click)="onSubmit()"
           />
+
         </div>
   
       </form>

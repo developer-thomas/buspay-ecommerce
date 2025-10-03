@@ -6,6 +6,7 @@ import { map } from "rxjs";
 import { IProductFilters } from "./models/filters.model";
 import { ProductFiltersService } from "./services/filters/product-filters.service";
 import { IProduct } from "./models/product.model";
+import { ToastrService } from "ngx-toastr";
 
 /**
  * Facade para manipulação dos dados dos produtos.
@@ -14,14 +15,13 @@ import { IProduct } from "./models/product.model";
  */
 @Injectable({ providedIn: 'root' })
 export class ProductsFacade {
-
   private filtersService = inject(ProductFiltersService);
-
   // Destroyref precisa ser injetado através do método e não pelo construtor
   private destroyRef = inject(DestroyRef);
   private api = inject(ProductsApiService);
   private store = inject(ProductsStore);
-  
+  private toastr = inject(ToastrService);
+
   // Exposição do observable para o component se inscrever na storage
   products$ = this.store.products$;
   filteredProducts$ = this.store.filteredProducts$;
@@ -52,7 +52,6 @@ export class ProductsFacade {
         next: products => {
           this.store.setProducts(products)
         },
-        // Alterar para utilizar loading/skeleton
         error: (err) => this.store.setLoading(false),
         complete: () => this.store.setLoading(false)
       })
@@ -71,21 +70,55 @@ export class ProductsFacade {
       });
   }
 
-  changePage(page: number) {
-    this.store.setPage(page);
-  }
+  // changePage(page: number) {
+  //   this.store.setPage(page);
+  // }
 
   // ====================== CRUD ======================
   createProduct(product: IProduct) {
+    this.store.setLoading(true);
+
     this.api.create(product)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: created => {
-          this.store.addProduct(created);
+          this.store.setNewProduct(created);
+          console.log('criou', created);
+          this.toastr.success('Produto criado com sucesso.');
         },
         error: () => this.store.setLoading(false),
         complete: () => this.store.setLoading(false)
       })
   }
 
+  updateProduct(productId: number, product: IProduct) {
+    this.store.setLoading(true);
+
+    this.api.update(productId, product)
+      .pipe(takeUntilDestroyed(this.destroyRef))  
+      .subscribe({
+        next: updated => {
+          this.store.setNewProduct(updated);
+          console.log('atualizou', updated);
+          this.toastr.success('Produto atualizado com sucesso.');
+        },
+        error: () => this.store.setLoading(false),
+        complete: () => this.store.setLoading(false)
+      })
+  }
+
+  deleteProduct(productId: number) {
+    this.store.setLoading(true);
+    this.api.delete(productId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.store.setRemovedProduct(productId);
+          console.log('deletou', productId);
+          this.toastr.success('Produto deletado com sucesso.');
+        },
+        error: () => this.store.setLoading(false),
+        complete: () => this.store.setLoading(false)
+      })
+  }
 }

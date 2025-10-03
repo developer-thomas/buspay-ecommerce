@@ -20,7 +20,6 @@ import { IProduct } from '../../models/product.model';
 export class ProductFiltersComponent {
   readonly AppIcon = AppIcon;
 
-  // Expõe cada método separado (facilita o trabalho)
   categoryChange = output<string>();
   searchChange = output<string>();
   minChange = output<number>();
@@ -41,8 +40,6 @@ export class ProductFiltersComponent {
   }
 
   onCategory(value: string) {
-    console.log(value);
-    
     this.categoryChange.emit(value);
   }
 }

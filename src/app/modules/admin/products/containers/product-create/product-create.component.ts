@@ -1,10 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
 import { ProductsFacade } from '../../products.facade';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { IProduct } from '../../models/product.model';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-product-create',
@@ -18,20 +19,31 @@ import { HeaderComponent } from '../../../../shared/components/header/header.com
 })
 export class ProductCreateComponent implements OnInit{
 
-  productsFacade = inject(ProductsFacade);
-  router = inject(Router);
+  private productsFacade = inject(ProductsFacade);
+  private router = inject(Router);
+  private location = inject(Location);
+  private destroyRef = inject(DestroyRef);
   
   categories$ = this.productsFacade.categories$
   loading$ = this.productsFacade.loading$;
-
 
   ngOnInit(): void {
     this.productsFacade.loadProducts();
   }
 
-  onSubmit(product: IProduct) {}
+  onSubmit(product: IProduct) {
+    this.productsFacade.createProduct(product);
+
+    this.loading$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: (loading) => {        
+        if(loading === false) {
+          this.router.navigate(['../']);
+        }
+      }
+    })
+  }
   
   onCancel() {
-    this.router.navigate(['../']);
+    this.location.back();
   }
 }

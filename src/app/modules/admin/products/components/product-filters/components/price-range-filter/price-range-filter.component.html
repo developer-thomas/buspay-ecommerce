@@ -1,22 +1,22 @@
 <div class="space-y-2">
     <label  
-        for="priceRange"
+        for="minPrice"
         class="text-sm font-medium flex items-center gap-2">
-            <app-custom-icon [iconName]="AppIcon.ProductPrice"/>
-            <span>{{ label() }}</span>    
+        <app-custom-icon [iconName]="AppIcon.ProductPrice"/>
+        <span>{{ label() }}</span>    
     </label>
 
     <div class="grid grid-cols-2 gap-2">  
         <input 
-            type="number" 
             placeholder="Min."
             class="input-base"
+            id="minPrice"
             (input)="onMinChange($event)"
         >
         <input 
-            type="number" 
             placeholder="Máx."
             class="input-base"
+            id="maxPrice"
             (input)="onMaxChange($event)"
         >
     </div>
