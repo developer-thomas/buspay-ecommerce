@@ -4,8 +4,8 @@ import { AppIcon } from '../../../../shared/components/custom-icon/enum/app-icon
 import { TextFilterComponent } from './components/text-filter/text-filter.component';
 import { PriceRangeFilterComponent } from './components/price-range-filter/price-range-filter.component';
 import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
-import { IProduct } from '../../models/product.model';
 
+/** DUMB COMPONENTE para centralizar os filtros de produto */
 @Component({
   selector: 'app-product-filters',
   imports: [

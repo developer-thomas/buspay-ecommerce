@@ -5,6 +5,7 @@ import { filter, map, take } from 'rxjs';
 import { IProduct } from '../models/product.model';
 import { ToastrService } from 'ngx-toastr';
 
+/** Resolve o produto para a edição */
 export const productsResolver: ResolveFn<IProduct | null> = (route, state) => {
   const productsFacade = inject(ProductsFacade);
   const router = inject(Router);
@@ -20,7 +21,7 @@ export const productsResolver: ResolveFn<IProduct | null> = (route, state) => {
   productsFacade.loadProducts();
 
   return productsFacade.products$.pipe(
-    // Se não fizer isso, no refresh da página tava voltando e lançando erro pois não tinha produtos
+    // Se não fizer isso, no refresh da página estava voltando e lançava erro pois não tinha produtos
     filter(products => products.length > 0),
     take(1),
     map( products => {

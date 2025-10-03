@@ -35,11 +35,13 @@ export class ProductEditComponent {
     this.getResolverProduct();
   }
 
+  /** Pega o produto do resolver */
   getResolverProduct() {
     const currentProduct = this.route.snapshot.data['product'];
     this.product.set(currentProduct);
   }
 
+  /** Envia o produto para o facade e se inscreve no loading$ para fazer o skeleton funcionar*/
   onSubmit(product: IProduct) {
     this.productsFacade.createProduct(product);
 

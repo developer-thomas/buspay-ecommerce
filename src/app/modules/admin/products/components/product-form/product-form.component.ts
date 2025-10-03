@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { BaseButtonComponent } from '../../../../shared/components/base-button/base-button.component';
 import { NgxMaskDirective } from 'ngx-mask';
 
+/** DUMB COMPONENTE para o formulário de produto */
 @Component({
   selector: 'app-product-form',
   imports: [
