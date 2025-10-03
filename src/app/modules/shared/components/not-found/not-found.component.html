@@ -1,4 +1,16 @@
-<div class="col-span-full flex flex-col items-center justify-center">
-    <img src="images/not-found.gif" class="h-96 object-cover" alt="Nenhum produto encontrado">
-    <p class="text-primary-light">Não encontramos nada por aqui ...</p>
+<div class="w-full flex flex-col items-center justify-center">
+    <div class="col-span-full flex flex-col items-center justify-center">
+        <img src="images/not-found.gif" class="h-96 object-cover" alt="Nenhum produto encontrado">
+        <p class="text-primary-light">Não encontramos nada por aqui ...</p>
+    </div>
+    
+    @if(showButton) {
+    <app-base-button 
+        [label]="'Voltar para a home'"
+        [styleClass]="'filled'"
+        [useIcon]="false"
+        routerLink="/admin"
+            class="mt-4"
+        />
+    }
 </div>
