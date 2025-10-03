@@ -1,4 +1,4 @@
 export const environment = {
-    // Esconder essa env
+    production: true,
     api: 'https://fakestoreapi.com'
 };

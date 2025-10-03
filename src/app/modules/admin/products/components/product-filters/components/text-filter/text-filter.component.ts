@@ -27,6 +27,4 @@ export class TextFilterComponent {
     let treatedValue = value.trim().toLowerCase();
     this.textSearch.emit(treatedValue);
    }
-
-   
 }

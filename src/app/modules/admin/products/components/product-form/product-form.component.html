@@ -1,0 +1,124 @@
+<main class="container mx-auto py-8">
+    <div class="max-w-4xl mx-auto p-6 product-card standard-hover-effect">
+      <form [formGroup]="form" class="space-y-6">
+        
+       
+        <div class="space-y-2">
+          <label for="title">Título *</label>
+          <input 
+            id="title" 
+            formControlName="title" 
+            placeholder="Nome do produto" 
+            class="input-base" 
+          />
+
+          @if (form.get('title')?.invalid && form.get('title')?.touched) {
+            <small class="text-danger">
+              Título é obrigatório
+            </small>
+          }
+        </div>
+  
+     
+        <div class="space-y-2">
+          <label for="price">Preço *</label>
+          <input 
+            prefix="R$ "
+            mask="separator.2"
+            thousandSeparator="."
+            id="price" 
+            type="text"  
+            formControlName="price" placeholder="R$ 0.00"
+            class="input-base" 
+          />
+
+          @if (form.get('price')?.invalid && form.get('price')?.touched) {
+            <small class="text-danger">
+              Preço inválido
+            </small>
+          }
+        </div>
+  
+       
+        <div class="space-y-2">
+          <label for="category">Categoria *</label>
+          <select 
+            id="category" 
+            formControlName="category"
+            class="input-base"
+          >
+            <option value="" disabled>Selecione uma categoria</option>
+           
+            @for (category of categories(); track $index) {
+              <option [value]="category">{{ category | titlecase }}</option>
+            }
+          </select>
+
+          @if (form.get('category')?.invalid && form.get('category')?.touched) {
+            <small class="text-danger">
+              Categoria é obrigatória
+            </small>
+          }
+        </div>
+  
+        
+        <div class="space-y-2">
+          <label for="image">URL da Imagem *</label>
+          <input 
+            id="image" 
+            type="url" 
+            formControlName="image" 
+            placeholder="https://www.google.com"
+            class="input-base" 
+          />
+
+          @if (form.get('image')?.invalid && form.get('image')?.touched) {
+            <small class="text-danger">
+              URL inválida
+            </small>
+          }
+        </div>
+  
+        
+        <div class="space-y-2">
+          <label for="description">Descrição *</label>
+          <textarea 
+            id="description" 
+            formControlName="description" 
+            placeholder="Descreva o produto..."
+            rows="4" 
+            class="input-base resize-none">
+          </textarea>
+          
+          @if (form.get('description')?.invalid && form.get('description')?.touched) {
+            <small class="text-danger">
+              Descrição é obrigatória
+            </small>
+          }
+        </div>
+  
+  
+        <div class="flex gap-3 pt-4 justify-between">
+
+          <app-base-button 
+            label="cancelar"
+            styleClass="secondary"
+            [disabled]="loading() ? true : false"
+            (click)="onCancel()"
+            [useIcon]="false"
+          />
+          
+          <app-base-button 
+            [label]=" product() ? 'Atualizar Produto' : 'Criar Produto' "
+            styleClass="filled"
+            [disabled]="loading() || form.invalid"
+            [useIcon]="false"
+            (click)="onSubmit()"
+          />
+
+        </div>
+  
+      </form>
+    </div>
+  </main>
+  

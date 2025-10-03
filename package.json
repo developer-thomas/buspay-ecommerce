@@ -10,6 +10,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^19.2.15",
+    "@angular/cdk": "^19.2.19",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
@@ -19,8 +21,12 @@
     "@angular/router": "^19.2.0",
     "@ng-icons/core": "^31.4.0",
     "@ng-icons/feather-icons": "^32.1.0",
+    "@sweetalert2/ngx-sweetalert2": "^14.0.0",
     "bootstrap": "^5.3.8",
+    "ngx-mask": "^20.0.3",
+    "ngx-toastr": "^19.1.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.23.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

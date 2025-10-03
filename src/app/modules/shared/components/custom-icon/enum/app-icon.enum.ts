@@ -4,7 +4,14 @@ export enum AppIcon {
     User,
     ProductTag,
     AddIcon,
-    TrashIcon
+    TrashIcon,
+    Menu,
+    Product,
+    Bell,
+    CloseIcon,
+    MenuIcon,
+    SettingsIcon,
+    UserIcon
 }
 
 export const ICON_MAP: Record<AppIcon, string> = {
@@ -14,5 +21,12 @@ export const ICON_MAP: Record<AppIcon, string> = {
     [AppIcon.ProductTag]: 'featherTag',
     [AppIcon.AddIcon]: 'featherPlus',
     [AppIcon.TrashIcon]: 'featherTrash2',
+    [AppIcon.Menu]: 'featherMenu',
+    [AppIcon.Product]: 'featherBox',
+    [AppIcon.Bell]: 'featherBell',
+    [AppIcon.CloseIcon]: 'featherX',
+    [AppIcon.MenuIcon]: 'featherMenu',
+    [AppIcon.SettingsIcon]: 'featherSettings',
+    [AppIcon.UserIcon]: 'featherUser',
 };
 

@@ -9,7 +9,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { ProductSkeletonComponent } from '../../components/skeletons/product-skeleton/product-skeleton.component';
 import { NotFoundComponent } from '../../../../shared/components/not-found/not-found.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ConfirmDialogService } from '../../../../shared/utils/sweet-alert.service';
 
 @Component({
   selector: 'app-product-list-page',
@@ -27,8 +28,11 @@ import { RouterModule } from '@angular/router';
   styleUrl: './product-list-page.component.scss'
 })
 export class ProductListPageComponent implements OnInit {
-  productsFacade = inject(ProductsFacade);
-  destroyRef = inject(DestroyRef);
+  private productsFacade = inject(ProductsFacade);
+  private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private confirmDialogService = inject(ConfirmDialogService);
 
   // Paginação local
   currentPage = signal(1);
@@ -67,20 +71,6 @@ export class ProductListPageComponent implements OnInit {
     this.nameFilter.set(name);
     this.applyFilters();
   }
-
-  private applyFilters() {
-    this.productsFacade.applyFilters(
-      {
-        category: this.categoryFilter(),
-        name: this.nameFilter(),
-        min: this.minFilter(),
-        max: this.maxFilter()
-      }
-    );
-
-    this.currentPage.set(1);
-    this.updatePaginatedProducts();
-  }
   
   onMinChange(min: number) {
     this.minFilter.set(min);
@@ -107,7 +97,37 @@ export class ProductListPageComponent implements OnInit {
         this.totalItems = products.length;
       });
   }
+  
+  private applyFilters() {
+    this.productsFacade.applyFilters(
+      {
+        category: this.categoryFilter(),
+        name: this.nameFilter(),
+        min: this.minFilter(),
+        max: this.maxFilter()
+      }
+    );
 
+    this.currentPage.set(1);
+    this.updatePaginatedProducts();
+  }
+
+  onEdit(id: number) {
+    this.router.navigate(['edit', id], { relativeTo: this.route });
+  }
+
+  onDelete(id: number) {
+    const message = "Deseja deletar este produto?";
+    this.confirmDialogService.confirm(message).then(result => {
+      if(result) {
+        this.productsFacade.deleteProduct(id);
+      }
+    });
+  }
+
+  onButtonClick() {
+    this.router.navigate(['create'], { relativeTo: this.route });
+  }
   // Posso criar um método central para atualizar somente as chaves necessárias do um obj signal filters
   // private updateFilters(filters: IProductFilters) {}
 
