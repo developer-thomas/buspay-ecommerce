@@ -1,0 +1,63 @@
+<div class="flex h-screen relative">
+  
+  <aside class="hidden md:flex flex-col w-56 border-r bg-card">
+    <div class="p-5 border-b border-gray-border">
+      <img src="images/logo.png" alt="BusPay Ecommerce" class="h-9 w-auto mx-auto">
+    </div>
+    
+    <nav class="flex-1 py-9 px-4 space-y-1">
+      @for(item of routes; track item.route) {
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="bg-primary text-secondary"
+          class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground"
+        >
+          <app-custom-icon [iconName]="item.icon" class="h-5 w-5"></app-custom-icon>
+          <span>{{ item.label | titlecase }}</span>
+        </a>
+      }
+    </nav>
+  </aside>
+
+  
+  @if (drawerOpen()) {
+    <aside class="fixed inset-y-0 left-0 z-50 w-56 bg-card md:hidden bg-primary text-secondary">
+      <div class="p-5 border-b border-gray-border">
+        <img src="images/logo.png" alt="BusPay Ecommerce" class="h-9 w-auto mx-auto">
+      </div>
+      
+      <nav class="flex-1 py-9 px-4 space-y-1">
+        @for(item of routes; track item.route) {
+          <a
+            [routerLink]="item.route"
+            routerLinkActive="bg-primary text-secondary"
+            class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground"
+            (click)="closeDrawer()"
+          >
+            <app-custom-icon [iconName]="item.icon" class="h-5 w-5"></app-custom-icon>
+            <span>{{ item.label | titlecase }}</span>
+          </a>
+        }
+        
+      </nav>
+    </aside>
+  }
+
+  
+  <div class="flex-1 flex flex-col">
+    <main class="flex-1 overflow-auto bg-background">
+      <router-outlet />
+    </main>
+  </div>
+
+  <button
+    (click)="toggleDrawer()"
+    class="fixed bottom-4 left-6 z-50 bg-primary text-secondary p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 md:hidden w-12"
+    [ngClass]="{'bg-secondary text-black': drawerOpen()}"
+    [class.rotate-180]="drawerOpen()"
+  >
+    <app-custom-icon 
+      [iconName]="drawerOpen() ? AppIcon.CloseIcon : AppIcon.MenuIcon" 
+    />
+  </button>
+</div>
