@@ -6,7 +6,14 @@ import {
   featherPlus,
   featherSearch,
   featherTag,
-  featherTrash2
+  featherTrash2,
+  featherArchive,
+  featherMenu,
+  featherBox,
+  featherBell,
+  featherX,
+  featherUser,
+  featherSettings
 } from '@ng-icons/feather-icons';
 
 // Aqui importa somente os ícones que for usar durante a aplicação
@@ -16,6 +23,13 @@ export const ICONS_PROVIDERS: Provider[] = [
     featherTrash2,
     featherSearch,
     featherDollarSign,
-    featherTag
+    featherTag,
+    featherArchive,
+    featherMenu,
+    featherBox,
+    featherBell,
+    featherX,
+    featherSettings,
+    featherUser,
   })
 ];
