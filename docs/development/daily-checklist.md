@@ -77,7 +77,7 @@ Na entrevista foi destacado que o foco seria ver mais sobre **arquitetura**, ent
 **Sistema de estilos**
   - Organização SCSS por camadas
   - Classes customizadas no Tailwind
-  - Componente de ícones com abstração
+  - Componente de ícones com abstração utilizando pipe e ENUM para mapeamento, caso queria mudar a lib, só mexe em um lugar
 
 **Componentes base**
   - Cards de produtos consumindo a API
