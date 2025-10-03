@@ -42,10 +42,10 @@ ng build --prod
 
 
 ## Documentação
-- [Rascunho Inicial para documentação](./docs/development/rascunhos-documentacao.md)
 - [Arquitetura Detalhada](./docs/development/architecture.md)
 - [Processo de Desenvolvimento](./docs/development/daily-checklist.md)
 - [Decisões Técnicas](./docs/development/decisions.md)
+- [Rascunho Inicial para documentação](./docs/development/rascunhos-documentacao.md)
 - [Referências e Estudos](./docs/references/resources.md)
 
 
