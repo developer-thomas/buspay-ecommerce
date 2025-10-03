@@ -8,8 +8,11 @@ import { AppIcon } from '../shared/components/custom-icon/enum/app-icon.enum';
   template: '<app-sidenav [routes]="allRoutes" />'
 })
 export class AdminComponent {
+
   allRoutes: ISidenavRoute[] = [
     { label: 'produtos', route: 'products', icon: AppIcon.Product },
+
+    // Rotas fakes para simular escalabilidade
     { label: 'categorias', route: 'categories', icon: AppIcon.ProductTag },
     { label: 'pedidos', route: 'orders', icon: AppIcon.ProductPrice },
     { label: 'usuarios', route: 'users', icon: AppIcon.UserIcon },
